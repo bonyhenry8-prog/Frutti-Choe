@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desayunos Sorpresa - Frutti-Choe Quito</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        frutti: {
+                            rojo: '#e63946',
+                            chocolate: '#4a2e1b',
+                            amarillo: '#ffb703',
+                            crema: '#FAEBD7',
+                            verde: '#2d6a4f'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #FAEBD7;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e63946' opacity='0.08'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffb703' opacity='0.1'%3E%3Cpath d='M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z'/%3E%3C/svg%3E");
+            background-size: 120px 120px, 150px 150px;
+        }
+        .card-option {
+            transition: all 0.2s ease-in-out;
+        }
+        .card-option.selected {
+            border-color: #2d6a4f !important;
+            background-color: #f0fdf4 !important;
+            box-shadow: 0 4px 12px rgba(45, 106, 79, 0.2);
+        }
+        .decoracion-card.selected {
+            border-color: #2d6a4f !important;
+            background-color: #f0fdf4 !important;
+            ring: 2px solid #2d6a4f;
+        }
+        @keyframes trashEffect {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(0.95) translateY(10px); opacity: 0.5; }
+            100% { transform: scale(0.9) translateY(20px); opacity: 0; }
+        }
+        .animar-borrado {
+            animation: trashEffect 0.35s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="text-stone-800 font-sans min-h-screen flex flex-col justify-between antialiased">
+
+    <!-- Header con botón de retorno y carrito -->
+    <header class="bg-white/95 backdrop-blur-md shadow-md py-4 px-6 flex justify-between items-center border-b-4 border-frutti-verde sticky top-0 z-40">
+        <div class="flex items-center space-x-3">
+            <a href="index.html" class="bg-frutti-chocolate hover:bg-stone-800 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow transition" title="Volver al Inicio">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <div>
+                <h1 class="text-xl md:text-2xl font-black text-frutti-verde uppercase font-serif">Menú de Desayunos</h1>
+                <p class="text-xs text-stone-500 font-medium">Desayunos Sorpresa en Quito</p>
+            </div>
+        </div>
+
+        <button onclick="toggleCarrito()" class="relative bg-frutti-chocolate hover:bg-stone-800 text-white px-4 py-2 rounded-2xl shadow-lg flex items-center space-x-2 transition border-2 border-frutti-amarillo">
+            <i class="fa-solid fa-cart-shopping text-frutti-amarillo"></i>
+            <span class="font-bold text-sm hidden sm:inline">Tu Pedido</span>
+            <span id="contador-carrito" class="bg-frutti-rojo text-white rounded-full px-2 py-0.5 text-xs font-black">0</span>
+        </button>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="max-w-7xl mx-auto px-4 py-10 flex-1">
+        
+        <!-- IMAGEN CENTRAL PRINCIPAL -->
+        <div class="max-w-2xl mx-auto mb-8 text-center">
+            <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-frutti-amarillo bg-white mb-6">
+                <img src="Modelos Desayunos/Desayuno.jpg" 
+                     onerror="this.onerror=null; this.src='Desayuno.jpg';" 
+                     alt="Desayunos Sorpresa Frutti-Choe" 
+                     class="w-full h-72 sm:h-80 object-cover hover:scale-105 transition duration-500">
+            </div>
+
+            <span class="bg-emerald-100 text-frutti-verde text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider border border-emerald-200 shadow-sm">
+                ☕ Empezar el Día con Alegría
+            </span>
+            <h2 class="text-3xl md:text-4xl font-black text-stone-900 font-serif mt-3">
+                Menú de Desayunos Sorpresa
+            </h2>
+            <p class="text-stone-600 text-sm mt-2 max-w-xl mx-auto mb-6">
+                Elige una de nuestras opciones prediseñadas o arma tu propio desayuno seleccionando cada ingrediente a tu gusto.
+            </p>
+
+            <!-- Botón Armar mi Desayuno -->
+            <button onclick="abrirModalArmador()" class="bg-frutti-amarillo hover:bg-amber-500 text-stone-900 font-black px-8 py-4 rounded-2xl shadow-xl text-sm uppercase tracking-wider inline-flex items-center space-x-3 transition transform hover:scale-105 border-2 border-amber-600 cursor-pointer">
+                <i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
+                <span>Armar mi Desayuno Personalizado</span>
+            </button>
+        </div>
+
+        <!-- SECCIÓN DE MODELOS DE DECORACIÓN EN EL CATÁLOGO PRINCIPAL -->
+        <div class="max-w-5xl mx-auto mb-16 bg-white/80 backdrop-blur-md rounded-3xl p-6 shadow-xl border-2 border-amber-200">
+            <div class="text-center mb-6">
+                <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-3 py-1 rounded-full uppercase border border-amber-200">
+                    🎨 Estilos Disponibles
+                </span>
+                <h3 class="text-2xl font-black text-stone-900 font-serif mt-1">Nuestros Modelos de Decoración</h3>
+                <p class="text-xs text-stone-500">Haz clic en la lupa para ampliar y conocer los detalles de cada diseño para tu desayuno.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <!-- Modelo 01 -->
+                <div class="bg-white rounded-2xl shadow-md border-2 border-stone-200 overflow-hidden flex flex-col items-center p-3">
+                    <div class="relative group w-full h-48 rounded-xl overflow-hidden mb-3 bg-stone-100">
+                        <img src="Modelos Desayunos/Modelo01.jpg" onerror="this.src='Modelo01.jpg'" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <button type="button" onclick="abrirZoom('Modelos Desayunos/Modelo01.jpg', 'Modelo de Decoración 01')" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white font-bold transition text-sm space-x-1">
+                            <i class="fa-solid fa-magnifying-glass-plus text-lg"></i>
+                            <span>Ampliar</span>
+                        </button>
+                    </div>
+                    <h4 class="font-bold text-sm text-stone-900 font-serif">Modelo de Decoración 01</h4>
+                    <span class="text-[11px] text-frutti-verde font-semibold mt-1">Elegancia y Estilo</span>
+                </div>
+
+                <!-- Modelo 02 -->
+                <div class="bg-white rounded-2xl shadow-md border-2 border-stone-200 overflow-hidden flex flex-col items-center p-3">
+                    <div class="relative group w-full h-48 rounded-xl overflow-hidden mb-3 bg-stone-100">
+                        <img src="Modelos Desayunos/Modelo02.jpg" onerror="this.src='Modelo02.jpg'" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <button type="button" onclick="abrirZoom('Modelos Desayunos/Modelo02.jpg', 'Modelo de Decoración 02')" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white font-bold transition text-sm space-x-1">
+                            <i class="fa-solid fa-magnifying-glass-plus text-lg"></i>
+                            <span>Ampliar</span>
+                        </button>
+                    </div>
+                    <h4 class="font-bold text-sm text-stone-900 font-serif">Modelo de Decoración 02</h4>
+                    <span class="text-[11px] text-frutti-verde font-semibold mt-1">Detalle Sorpresa</span>
+                </div>
+
+                <!-- Modelo 03 -->
+                <div class="bg-white rounded-2xl shadow-md border-2 border-stone-200 overflow-hidden flex flex-col items-center p-3">
+                    <div class="relative group w-full h-48 rounded-xl overflow-hidden mb-3 bg-stone-100">
+                        <img src="Modelos Desayunos/Modelo03.jpg" onerror="this.src='Modelo03.jpg'" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <button type="button" onclick="abrirZoom('Modelos Desayunos/Modelo03.jpg', 'Modelo de Decoración 03')" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white font-bold transition text-sm space-x-1">
+                            <i class="fa-solid fa-magnifying-glass-plus text-lg"></i>
+                            <span>Ampliar</span>
+                        </button>
+                    </div>
+                    <h4 class="font-bold text-sm text-stone-900 font-serif">Modelo de Decoración 03</h4>
+                    <span class="text-[11px] text-frutti-verde font-semibold mt-1">Clásico Especial</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN DE LAS 3 OPCIONES CATÁLOGO -->
+        <div id="seccion-opciones" class="pt-2">
+            <div class="text-center mb-8">
+                <h3 class="text-2xl font-black text-stone-900 font-serif">Opciones Completas Recomendadas</h3>
+                <p class="text-stone-600 text-xs mt-1">Nuestras combinaciones más solicitadas en Quito.</p>
+            </div>
+
+            <!-- GRID DE LAS 3 OPCIONES DE DESAYUNOS -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="grid-desayunos">
+                
+                <!-- Opción 1: Clásico Sonrisas -->
+                <div class="bg-white rounded-3xl shadow-lg border-2 border-stone-200 overflow-hidden flex flex-col justify-between hover:shadow-2xl transition-all duration-300">
+                    <div class="p-5 flex flex-col justify-between flex-1 bg-white">
+                        <div>
+                            <span class="text-[10px] font-bold text-frutti-verde uppercase tracking-wider block mb-1">DESAYUNO SORPRESA</span>
+                            <h3 class="font-bold text-lg text-stone-900 font-serif mb-2">Clásico Sonrisas</h3>
+                            <p class="text-xs text-stone-500 mb-4 italic">Ideal para dar el día a día con una sonrisa llena de energía.</p>
+                            <ul class="text-xs text-stone-700 space-y-1.5 mb-6">
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-frutti-verde text-[10px]"></i><span>Sándwich artesanal (Pan, queso y vegetales frescos).</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-frutti-verde text-[10px]"></i><span>Ensalada de frutas frescas de temporada.</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-frutti-verde text-[10px]"></i><span>Jugo natural refrescante (Fruta fresca con o sin azúcar).</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-frutti-verde text-[10px]"></i><span>Café late listo para disfrutar.</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-frutti-verde text-[10px]"></i><span>Yogurt acompañado de cereal Granola/Flakes.</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-frutti-verde text-[10px]"></i><span>Barra de Chocolate Manicho, crujiente y caliente en leche.</span></li>
+                            </ul>
+                        </div>
+                        <div class="pt-3 border-t border-stone-100 flex items-center justify-between">
+                            <span class="text-xl font-black text-frutti-verde">$19.50</span>
+                            <button onclick="iniciarSeleccionPredisponida('Clásico Sonrisas', 19.50)" class="bg-frutti-chocolate hover:bg-stone-800 text-white font-bold px-3.5 py-1.5 rounded-xl text-xs flex items-center space-x-1 shadow transition">
+                                <i class="fa-solid fa-cart-plus"></i>
+                                <span>Añadir</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Opción 2: Dulce Despertar -->
+                <div class="bg-white rounded-3xl shadow-lg border-2 border-stone-200 overflow-hidden flex flex-col justify-between hover:shadow-2xl transition-all duration-300">
+                    <div class="p-5 flex flex-col justify-between flex-1 bg-white">
+                        <div>
+                            <span class="text-[10px] font-bold text-frutti-verde uppercase tracking-wider block mb-1">DESAYUNO SORPRESA</span>
+                            <h3 class="font-bold text-lg text-stone-900 font-serif mb-2">Dulce Despertar</h3>
+                            <p class="text-xs text-stone-500 mb-4 italic">Delicioso sabor matutino con un toque dulce y gran variedad crocante.</p>
+                            <ul class="text-xs text-stone-700 space-y-1.5 mb-6">
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-frutti-verde text-[10px]"></i><span>Tostada mixta caliente (Jamón de pierna y queso).</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-frutti-verde text-[10px]"></i><span>Ensalada de frutas con yogurt y granola crocante.</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-frutti-verde text-[10px]"></i><span>Porción de postre Tres Leches (Suaveza y lascivia).</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-frutti-verde text-[10px]"></i><span>Jugo natural.</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-frutti-verde text-[10px]"></i><span>Café caliente o Café Latte (A elección).</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-frutti-verde text-[10px]"></i><span>Paquete de galletas Mini.</span></li>
+                            </ul>
+                        </div>
+                        <div class="pt-3 border-t border-stone-100 flex items-center justify-between">
+                            <span class="text-xl font-black text-frutti-verde">$17.00</span>
+                            <button onclick="iniciarSeleccionPredisponida('Dulce Despertar', 17.00)" class="bg-frutti-chocolate hover:bg-stone-800 text-white font-bold px-3.5 py-1.5 rounded-xl text-xs flex items-center space-x-1 shadow transition">
+                                <i class="fa-solid fa-cart-plus"></i>
+                                <span>Añadir</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Opción 3: Premium Recuerdo -->
+                <div class="bg-white rounded-3xl shadow-lg border-2 border-stone-200 overflow-hidden flex flex-col justify-between hover:shadow-2xl transition-all duration-300">
+                    <div class="p-5 flex flex-col justify-between flex-1 bg-white">
+                        <div>
+                            <span class="text-[10px] font-bold text-frutti-verde uppercase tracking-wider block mb-1">DESAYUNO SORPRESA</span>
+                            <h3 class="font-bold text-lg text-stone-900 font-serif mb-2">Premium Recuerdo</h3>
+                            <p class="text-xs text-stone-500 mb-4 italic">Lo mejor en detalles cumplidores y de categoría. ¡Regalo inolvidable!</p>
+                            <ul class="text-xs text-stone-700 space-y-1.5 mb-6">
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-frutti-verde text-[10px]"></i><span>Taza personalizada (Con nombre o frase / Para el Comprador).</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-frutti-verde text-[10px]"></i><span>Comida/sándwich gourmet.</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-frutti-verde text-[10px]"></i><span>Mini arreglo de fresas con choc.con rompénguez.</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-frutti-verde text-[10px]"></i><span>Dona decorada de chocolate.</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-frutti-verde text-[10px]"></i><span>Yogurt individual o capuchino.</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-frutti-verde text-[10px]"></i><span>Café o Café Late.</span></li>
+                            </ul>
+                        </div>
+                        <div class="pt-3 border-t border-stone-100 flex items-center justify-between">
+                            <span class="text-xl font-black text-frutti-verde">$26.25</span>
+                            <button onclick="iniciarSeleccionPredisponida('Premium Recuerdo', 26.25)" class="bg-frutti-chocolate hover:bg-stone-800 text-white font-bold px-3.5 py-1.5 rounded-xl text-xs flex items-center space-x-1 shadow transition">
+                                <i class="fa-solid fa-cart-plus"></i>
+                                <span>Añadir</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- MODAL INTERACTIVO PARA ARMAR EL DESAYUNO -->
+    <div id="modal-armador" class="fixed inset-0 z-[999] bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4">
+        <div class="relative bg-white rounded-3xl overflow-hidden max-w-4xl w-full shadow-2xl p-5 sm:p-8 max-h-[92vh] flex flex-col">
+            
+            <button onclick="cerrarModalArmador()" class="absolute top-4 right-4 text-stone-500 hover:text-frutti-rojo text-2xl font-bold bg-stone-100 rounded-full w-10 h-10 flex items-center justify-center shadow z-10">
+                &times;
+            </button>
+
+            <div class="mb-4 text-center sm:text-left border-b border-stone-200 pb-3">
+                <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-3 py-1 rounded-full uppercase border border-amber-200">
+                    🛠️ Creador Interactivo
+                </span>
+                <h3 class="text-2xl font-black text-stone-900 font-serif mt-1">Arma tu Desayuno a Medida</h3>
+                <p class="text-xs text-stone-500">Selecciona los productos deseados y haz clic en "Finalizar Desayuno" para calcular el valor total.</p>
+            </div>
+
+            <div class="flex-1 overflow-y-auto space-y-6 pr-2" id="contenedor-opciones-armador">
+                
+                <!-- CATEGORÍA 1: BEBIDAS -->
+                <div>
+                    <h4 class="font-bold text-xs uppercase text-frutti-verde mb-3 tracking-wider flex items-center space-x-2">
+                        <i class="fa-solid fa-mug-hot"></i>
+                        <span>1. Bebidas</span>
+                    </h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                        <div onclick="toggleOpcionItem(this, 'Jugo Natural', 1.25)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Jugo Natural.jpg" onerror="this.src='Opciones/Jugo Natural.jpg'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Jugo Natural</span>
+                        </div>
+                        <div onclick="toggleOpcionItem(this, 'Jugo Sunny', 0.80)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Jugo Sunny.jpg" onerror="this.src='Opciones/Jugo Sunny.jpg'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Jugo Sunny</span>
+                        </div>
+                        <div onclick="toggleOpcionItem(this, 'Café Caliente', 1.25)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Cafe Caliente.avif" onerror="this.src='Opciones/Cafe Caliente.avif'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Café Caliente</span>
+                        </div>
+                        <div onclick="toggleOpcionItem(this, 'Caffe Lato', 2.50)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Cafe Lato.jpg" onerror="this.src='Opciones/Cafe Lato.jpg'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Caffe Lato</span>
+                        </div>
+                        <div onclick="toggleOpcionItem(this, 'Cerveza', 1.75)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Cerveza.jpg" onerror="this.src='Opciones/Cervezajpg.jpg'; if(!this.src.includes('Cerveza')) this.src='Opciones/Cervezajpg';" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Cerveza</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CATEGORÍA 2: SALADOS Y PLATOS FUERTES -->
+                <div>
+                    <h4 class="font-bold text-xs uppercase text-frutti-verde mb-3 tracking-wider flex items-center space-x-2">
+                        <i class="fa-solid fa-bread-slice"></i>
+                        <span>2. Salados y Platos Fuertes</span>
+                    </h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                        <div onclick="toggleOpcionItem(this, 'Sandwinch', 4.00)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Gemini_Generated_Image_5j97825j97825j97.jpg" onerror="this.src='Opciones/Gemini_Generated_Image_5j97825j97825j97.jpg'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Sandwinch</span>
+                        </div>
+                        <div onclick="toggleOpcionItem(this, 'Tostada Mixta', 1.75)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Tostada Mixta.jpg" onerror="this.src='Opciones/Tostada Mixta.jpg'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Tostada Mixta</span>
+                        </div>
+                        <div onclick="toggleOpcionItem(this, 'Arreglo Frutal', 4.00)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Arreglo de Fresas.jpg" onerror="this.src='Opciones/Arreglo de Fresas.jpg'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Arreglo Frutal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CATEGORÍA 3: FRUTAS Y LÁCTEOS -->
+                <div>
+                    <h4 class="font-bold text-xs uppercase text-frutti-verde mb-3 tracking-wider flex items-center space-x-2">
+                        <i class="fa-solid fa-apple-whole"></i>
+                        <span>3. Frutas y Lácteos</span>
+                    </h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                        <div onclick="toggleOpcionItem(this, 'Ensalada', 1.00)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Ensalada de frutas.webp" onerror="this.src='Opciones/Ensalada de frutas.webp'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Ensalada</span>
+                        </div>
+                        <div onclick="toggleOpcionItem(this, 'Ensalada con yogurt', 1.50)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Ensalada de frutas con yogurt.webp" onerror="this.src='Opciones/Ensalada de frutas con yogurt.webp'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Ensalada con yogurt</span>
+                        </div>
+                        <div onclick="toggleOpcionItem(this, 'Yogurt Tony', 1.00)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Yogurt Tony.jpg" onerror="this.src='Opciones/Yogurt Tony.jpg'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Yogurt Tony</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CATEGORÍA 4: POSTRES -->
+                <div>
+                    <h4 class="font-bold text-xs uppercase text-frutti-verde mb-3 tracking-wider flex items-center space-x-2">
+                        <i class="fa-solid fa-cake-candles"></i>
+                        <span>4. Postres</span>
+                    </h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                        <div onclick="toggleOpcionItem(this, 'Dona', 0.75)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Dona.jpg" onerror="this.src='Opciones/Dona.jpg'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Dona</span>
+                        </div>
+                        <div onclick="toggleOpcionItem(this, 'Postre Tres Leches', 1.50)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Postre Tres Leches.jpg" onerror="this.src='Opciones/Postre Tres Leches.jpg'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Postre Tres Leches</span>
+                        </div>
+                        <div onclick="toggleOpcionItem(this, 'Mini Tortas', 1.50)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Mini Tortas.jpg" onerror="this.src='Opciones/Mini Tortas.jpg'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Mini Tortas</span>
+                        </div>
+                        <div onclick="toggleOpcionItem(this, 'Gela Tony', 0.85)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/GelaTony.jpg" onerror="this.src='Opciones/GelaTony.jpg'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Gela Tony</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CATEGORÍA 5: CHOCOLATES -->
+                <div>
+                    <h4 class="font-bold text-xs uppercase text-frutti-verde mb-3 tracking-wider flex items-center space-x-2">
+                        <i class="fa-solid fa-cookie-bite"></i>
+                        <span>5. Chocolates</span>
+                    </h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                        <div onclick="toggleOpcionItem(this, 'Manicho', 0.75)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Manicho.webp" onerror="this.src='Opciones/Manicho.webp'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Manicho</span>
+                        </div>
+                        <div onclick="toggleOpcionItem(this, 'Chocolate Ferrero', 1.50)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Chocolate Ferrero.jpg" onerror="this.src='Opciones/Chocolate Ferrero.jpg'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Chocolate Ferrero</span>
+                        </div>
+                        <div onclick="toggleOpcionItem(this, 'Chocolate Galak', 1.50)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Chocolate Galak.webp" onerror="this.src='Opciones/Chocolate Galak.webp'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Chocolate Galak</span>
+                        </div>
+                        <div onclick="toggleOpcionItem(this, 'Chocolate Noggy', 2.50)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Chocolate Noggy.webp" onerror="this.src='Opciones/Chocolate Noggy.webp'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Chocolate Noggy</span>
+                        </div>
+                        <div onclick="toggleOpcionItem(this, 'Chocolate Vizzio', 2.50)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Chocolate Vizzio.webp" onerror="this.src='Opciones/Chocolate Vizzio.webp'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Chocolate Vizzio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CATEGORÍA 6: SNACKS -->
+                <div>
+                    <h4 class="font-bold text-xs uppercase text-frutti-verde mb-3 tracking-wider flex items-center space-x-2">
+                        <i class="fa-solid fa-cookie"></i>
+                        <span>6. Snacks y Galletas</span>
+                    </h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                        <div onclick="toggleOpcionItem(this, 'Mini Ritz', 0.75)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Mini Ritz.webp" onerror="this.src='Opciones/Mini Ritz.webp'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Mini Ritz</span>
+                        </div>
+                        <div onclick="toggleOpcionItem(this, 'Biscolata', 2.25)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Biscolata.jpg" onerror="this.src='Opciones/Biscolata.jpg'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Biscolata</span>
+                        </div>
+                        <div onclick="toggleOpcionItem(this, 'Galleta Galapaguitos', 0.75)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Galleta Galapaguitos.jpg" onerror="this.src='Opciones/Galleta Galapagitos.jpg'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Galleta Galapagitos</span>
+                        </div>
+                        <div onclick="toggleOpcionItem(this, 'Galleta Oreo', 1.25)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Galleta Oreo.jpg" onerror="this.src='Opciones/Galleta Oreo.jpg'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Galleta Oreo</span>
+                        </div>
+                        <div onclick="toggleOpcionItem(this, 'Papas Ruffles', 1.00)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Papas Ruffles.jpg" onerror="this.src='Opciones/Papas Ruffles.jpg'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Papas Ruffles</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CATEGORÍA 7: DETALLES ESPECIALES -->
+                <div>
+                    <h4 class="font-bold text-xs uppercase text-frutti-verde mb-3 tracking-wider flex items-center space-x-2">
+                        <i class="fa-solid fa-gift"></i>
+                        <span>7. Detalles Especiales</span>
+                    </h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                        <div onclick="toggleOpcionItem(this, 'Taza Personalizada', 5.00)" class="card-option border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde relative">
+                            <img src="Modelos Desayunos/Opciones/Taza Personalizada.webp" onerror="this.src='Opciones/Taza Personalizada.webp'" class="w-20 h-20 object-cover rounded-xl mb-2">
+                            <span class="font-bold text-xs text-stone-800 mt-1">Taza Personalizada</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Pie del Modal -->
+            <div class="mt-4 pt-4 border-t border-stone-200 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <div class="text-center sm:text-left">
+                    <span class="text-xs text-stone-500 font-bold block uppercase">Valor Total a Pagar:</span>
+                    <span id="armar-precio-total" class="text-2xl font-black text-frutti-verde">$0.00</span>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                    <button onclick="finalizarDesayuno()" class="bg-frutti-amarillo hover:bg-amber-500 text-stone-900 font-black px-6 py-3.5 rounded-2xl shadow-lg text-xs uppercase tracking-wider flex items-center justify-center space-x-2 transition border-2 border-amber-600">
+                        <i class="fa-solid fa-calculator text-base"></i>
+                        <span>Finalizar Desayuno</span>
+                    </button>
+                    <button id="btn-agregar-personalizado" onclick="abrirModalDecoracionParaArmado()" disabled class="bg-stone-400 opacity-60 cursor-not-allowed text-white font-black px-6 py-3.5 rounded-2xl shadow-lg text-xs uppercase tracking-wider flex items-center justify-center space-x-2 transition">
+                        <i class="fa-solid fa-cart-plus text-base"></i>
+                        <span>Agregar al Carrito</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: SELECCIONAR MODELO DE DECORACIÓN (Con márgenes internos de ganancia: Modelo 1: +$3.50, Modelo 2: +$3.00, Modelo 3: +$1.50) -->
+    <div id="modal-decoracion" class="fixed inset-0 z-[1000] bg-black/85 hidden flex items-center justify-center p-4 backdrop-blur-md">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl relative border-4 border-frutti-amarillo max-h-[90vh] overflow-y-auto">
+            <button onclick="cerrarModalDecoracion()" class="absolute top-3 right-4 text-stone-400 hover:text-stone-700 text-xl font-bold">&times;</button>
+            <div class="text-center mb-5">
+                <span class="bg-emerald-100 text-frutti-verde text-[10px] font-bold px-3 py-1 rounded-full uppercase border border-emerald-200">
+                    ✨ Paso Final
+                </span>
+                <h3 class="font-black text-xl text-stone-900 font-serif mt-1">Elige el Modelo de Decoración</h3>
+                <p class="text-xs text-stone-500 mt-1">Selecciona uno de nuestros 3 modelos de decoración para tu desayuno sorpresa.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                <!-- Modelo 01 Card (+3.50 interno) -->
+                <div onclick="seleccionarDecoracionCard('Modelo 01', 3.50)" class="decoracion-card border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde transition relative">
+                    <div class="relative group w-full h-36 rounded-xl overflow-hidden mb-2 bg-stone-100">
+                        <img src="Modelos Desayunos/Modelo01.jpg" onerror="this.src='Modelo01.jpg'" class="w-full h-full object-cover">
+                        <button type="button" onclick="event.stopPropagation(); abrirZoom('Modelos Desayunos/Modelo01.jpg', 'Modelo de Decoración 01')" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-xs rounded-xl transition"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+                    </div>
+                    <span class="font-bold text-xs text-stone-900">Modelo 01</span>
+                    <input type="radio" name="modelo_dec" value="Modelo 01" class="mt-2 text-frutti-verde">
+                </div>
+
+                <!-- Modelo 02 Card (+3.00 interno) -->
+                <div onclick="seleccionarDecoracionCard('Modelo 02', 3.00)" class="decoracion-card border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde transition relative">
+                    <div class="relative group w-full h-36 rounded-xl overflow-hidden mb-2 bg-stone-100">
+                        <img src="Modelos Desayunos/Modelo02.jpg" onerror="this.src='Modelo02.jpg'" class="w-full h-full object-cover">
+                        <button type="button" onclick="event.stopPropagation(); abrirZoom('Modelos Desayunos/Modelo02.jpg', 'Modelo de Decoración 02')" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-xs rounded-xl transition"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+                    </div>
+                    <span class="font-bold text-xs text-stone-900">Modelo 02</span>
+                    <input type="radio" name="modelo_dec" value="Modelo 02" class="mt-2 text-frutti-verde">
+                </div>
+
+                <!-- Modelo 03 Card (+1.50 interno) -->
+                <div onclick="seleccionarDecoracionCard('Modelo 03', 1.50)" class="decoracion-card border-2 border-stone-200 rounded-2xl p-3 cursor-pointer flex flex-col items-center text-center bg-white hover:border-frutti-verde transition relative">
+                    <div class="relative group w-full h-36 rounded-xl overflow-hidden mb-2 bg-stone-100">
+                        <img src="Modelos Desayunos/Modelo03.jpg" onerror="this.src='Modelo03.jpg'" class="w-full h-full object-cover">
+                        <button type="button" onclick="event.stopPropagation(); abrirZoom('Modelos Desayunos/Modelo03.jpg', 'Modelo de Decoración 03')" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-xs rounded-xl transition"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+                    </div>
+                    <span class="font-bold text-xs text-stone-900">Modelo 03</span>
+                    <input type="radio" name="modelo_dec" value="Modelo 03" class="mt-2 text-frutti-verde">
+                </div>
+            </div>
+
+            <button onclick="confirmarPedidoConDecoracion()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3.5 rounded-2xl shadow-lg transition text-xs uppercase tracking-wider flex items-center justify-center space-x-2">
+                <i class="fa-solid fa-cart-plus text-base"></i>
+                <span>Confirmar y Agregar al Carrito</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL DE EXTRAS -->
+    <div id="modal-extras" class="fixed inset-0 bg-black/75 z-[999] hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl relative border-4 border-frutti-amarillo max-h-[90vh] overflow-y-auto">
+            <button onclick="cerrarModalExtras()" class="absolute top-3 right-4 text-stone-400 hover:text-stone-700 text-xl font-bold">&times;</button>
+            <h3 class="font-black text-xl text-stone-900 font-serif mb-1 text-center">Personaliza tu Detalle</h3>
+            <p class="text-xs text-stone-500 text-center mb-5">Elige globos o carteles especiales para complementar tu sorpresa. (Haz clic en la lupa para ampliar modelos).</p>
+
+            <div class="space-y-6">
+                <!-- SECCIÓN GLOBOS -->
+                <div>
+                    <h4 class="font-bold text-xs text-frutti-verde uppercase tracking-wider mb-3">🎈 SELECCIONA UN GLOBO OPCIONAL:</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        
+                        <label class="flex items-center space-x-3 p-3 rounded-2xl border border-stone-200 hover:border-frutti-verde hover:bg-emerald-50/50 cursor-pointer transition">
+                            <input type="radio" name="globo" value="Ninguno" checked class="text-frutti-verde">
+                            <div class="w-12 h-12 rounded-xl bg-stone-100 flex items-center justify-center text-xl text-stone-400 flex-shrink-0">🚫</div>
+                            <span class="font-bold text-stone-800">Sin Globo adicional</span>
+                        </label>
+
+                        <label class="flex items-center justify-between p-3 rounded-2xl border border-stone-200 hover:border-frutti-verde hover:bg-emerald-50/50 cursor-pointer transition">
+                            <div class="flex items-center space-x-3">
+                                <input type="radio" name="globo" value="Globo Burbuja Feliz Cumpleaños 01 (+$3.00)" class="text-frutti-verde">
+                                <div class="relative group">
+                                    <img src="EXTRAS/Globos/GloboBurbujaFelizCumpleaños01.jpg" alt="Globo 1" class="w-12 h-12 rounded-xl object-cover border border-stone-200 flex-shrink-0" onerror="this.src='Logo.jpeg'">
+                                    <button type="button" onclick="event.preventDefault(); abrirZoom('EXTRAS/Globos/GloboBurbujaFelizCumpleaños01.jpg', 'Globo Burbuja 01')" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white rounded-xl transition text-xs"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+                                </div>
+                                <div>
+                                    <span class="font-bold text-stone-900 block">Burbuja 01</span>
+                                    <span class="text-frutti-verde font-black">+$3.00</span>
+                                </div>
+                            </div>
+                        </label>
+
+                        <label class="flex items-center justify-between p-3 rounded-2xl border border-stone-200 hover:border-frutti-verde hover:bg-emerald-50/50 cursor-pointer transition">
+                            <div class="flex items-center space-x-3">
+                                <input type="radio" name="globo" value="Globo Burbuja Feliz Cumpleaños 02 (+$3.00)" class="text-frutti-verde">
+                                <div class="relative group">
+                                    <img src="EXTRAS/Globos/GloboBurbujaFelizCumpleaños02.jpg" alt="Globo 2" class="w-12 h-12 rounded-xl object-cover border border-stone-200 flex-shrink-0" onerror="this.src='Logo.jpeg'">
+                                    <button type="button" onclick="event.preventDefault(); abrirZoom('EXTRAS/Globos/GloboBurbujaFelizCumpleaños02.jpg', 'Globo Burbuja 02')" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white rounded-xl transition text-xs"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+                                </div>
+                                <div>
+                                    <span class="font-bold text-stone-900 block">Burbuja 02</span>
+                                    <span class="text-frutti-verde font-black">+$3.00</span>
+                                </div>
+                            </div>
+                        </label>
+
+                        <label class="flex items-center justify-between p-3 rounded-2xl border border-stone-200 hover:border-frutti-verde hover:bg-emerald-50/50 cursor-pointer transition">
+                            <div class="flex items-center space-x-3">
+                                <input type="radio" name="globo" value="Globo Corazón Grande (+$1.50)" class="text-frutti-verde">
+                                <div class="relative group">
+                                    <img src="EXTRAS/Globos/GlobosCorazonGrande.jpg" alt="Globo Corazón" class="w-12 h-12 rounded-xl object-cover border border-stone-200 flex-shrink-0" onerror="this.src='Logo.jpeg'">
+                                    <button type="button" onclick="event.preventDefault(); abrirZoom('EXTRAS/Globos/GlobosCorazonGrande.jpg', 'Globo Corazón Grande')" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white rounded-xl transition text-xs"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+                                </div>
+                                <div>
+                                    <span class="font-bold text-stone-900 block">Corazón Grande</span>
+                                    <span class="text-frutti-verde font-black">+$1.50</span>
+                                </div>
+                            </div>
+                        </label>
+
+                        <label class="flex items-center justify-between p-3 rounded-2xl border border-stone-200 hover:border-frutti-verde hover:bg-emerald-50/50 cursor-pointer transition sm:col-span-2">
+                            <div class="flex items-center space-x-3">
+                                <input type="radio" name="globo" value="Globo Pequeño (+$1.00)" class="text-frutti-verde">
+                                <div class="relative group">
+                                    <img src="EXTRAS/Globos/GlobosFelizCumpleañosPequeño.jpg" alt="Globo Pequeño" class="w-12 h-12 rounded-xl object-cover border border-stone-200 flex-shrink-0" onerror="this.src='Logo.jpeg'">
+                                    <button type="button" onclick="event.preventDefault(); abrirZoom('EXTRAS/Globos/GlobosFelizCumpleañosPequeño.jpg', 'Globo Pequeño (Variedad)')" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white rounded-xl transition text-xs"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+                                </div>
+                                <div>
+                                    <span class="font-bold text-stone-900 block">Globo Pequeño (Variedad de Modelos)</span>
+                                    <span class="text-frutti-verde font-black">+$1.00</span>
+                                </div>
+                            </div>
+                        </label>
+
+                    </div>
+                </div>
+
+                <!-- SECCIÓN CARTELES -->
+                <div>
+                    <h4 class="font-bold text-xs text-frutti-chocolate uppercase tracking-wider mb-3">📜 SELECCIONA UN CARTEL DEDICATORIA ($1.50 c/u):</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <label class="flex items-center space-x-3 p-3 rounded-2xl border border-stone-200 hover:border-frutti-chocolate hover:bg-amber-50/50 cursor-pointer transition">
+                            <input type="radio" name="cartel" value="Ninguno" checked class="text-frutti-chocolate">
+                            <div class="w-12 h-12 rounded-xl bg-stone-100 flex items-center justify-center text-xl text-stone-400 flex-shrink-0">🚫</div>
+                            <span class="font-bold text-stone-800">Sin Cartel adicional</span>
+                        </label>
+                        <label class="flex items-center space-x-3 p-3 rounded-2xl border border-stone-200 hover:border-frutti-chocolate hover:bg-amber-50/50 cursor-pointer transition">
+                            <input type="radio" name="cartel" value="Cartel Feliz Cumpleaños (+$1.50)" class="text-frutti-chocolate">
+                            <img src="EXTRAS/Carteles de Fomix/FelizCumpleaños.jpg" alt="Cartel Cumpleaños" class="w-12 h-12 rounded-xl object-cover border border-stone-200 flex-shrink-0" onerror="this.src='Logo.jpeg'">
+                            <div>
+                                <span class="font-bold text-stone-900 block">Cartel Feliz Cumpleaños</span>
+                                <span class="text-frutti-chocolate font-black">+$1.50</span>
+                            </div>
+                        </label>
+                        <label class="flex items-center space-x-3 p-3 rounded-2xl border border-stone-200 hover:border-frutti-chocolate hover:bg-amber-50/50 cursor-pointer transition">
+                            <input type="radio" name="cartel" value="Cartel Feliz Días (+$1.50)" class="text-frutti-chocolate">
+                            <img src="EXTRAS/Carteles de Fomix/FelizDias.jpg" alt="Cartel Feliz Días" class="w-12 h-12 rounded-xl object-cover border border-stone-200 flex-shrink-0" onerror="this.src='Logo.jpeg'">
+                            <div>
+                                <span class="font-bold text-stone-900 block">Cartel Feliz Días</span>
+                                <span class="text-frutti-chocolate font-black">+$1.50</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 space-y-2">
+                <button onclick="guardarExtras()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow transition text-xs">
+                    Confirmar Extras y Actualizar Pedido
+                </button>
+                <button onclick="sinExtras()" class="w-full bg-stone-200 hover:bg-stone-300 text-stone-700 font-bold py-2.5 rounded-xl text-xs transition">
+                    No deseo ningún extra / Continuar sin extras
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE ZOOM -->
+    <div id="modal-zoom" class="fixed inset-0 z-[1050] bg-black/90 hidden flex items-center justify-center p-4">
+        <div class="relative max-w-lg w-full bg-white rounded-3xl p-4 text-center shadow-2xl">
+            <button onclick="cerrarZoom()" class="absolute top-3 right-4 text-stone-500 hover:text-red-600 text-2xl font-bold bg-stone-100 rounded-full w-10 h-10 flex items-center justify-center shadow">&times;</button>
+            <h4 id="zoom-titulo" class="font-black text-stone-900 font-serif text-lg mb-3"></h4>
+            <div class="rounded-2xl overflow-hidden bg-stone-100 flex items-center justify-center max-h-[70vh]">
+                <img id="zoom-img-src" src="" alt="Zoom Imagen" class="w-full object-contain max-h-[65vh]">
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL RECORDATORIO SERVICIO A DOMICILIO -->
+    <div id="modal-recordatorio-delivery" class="fixed inset-0 z-[999] bg-black/80 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 text-center shadow-2xl relative border-4 border-amber-400">
+            <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-3">
+                🛵
+            </div>
+            <h3 class="font-black text-xl text-stone-900 font-serif mb-2">¡Verifica tu Servicio a Domicilio!</h3>
+            <p class="text-stone-600 text-xs mb-4 leading-relaxed font-medium">
+                Recuerda que el <strong>Servicio a Domicilio tiene un costo adicional</strong> según tu ubicación exacta en Quito. 
+                <br><br>
+                Asegúrate de verificar y acordar el valor del envío con nuestro asesor al momento de enviar tu pedido por WhatsApp.
+            </p>
+            <div class="space-y-2">
+                <button onclick="confirmarYEnviarWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3 rounded-xl shadow-lg flex items-center justify-center space-x-2 transition text-xs uppercase">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span>Continuar para enviar por WhatsApp</span>
+                </button>
+                <button onclick="cerrarRecordatorioDelivery()" class="w-full bg-stone-200 hover:bg-stone-300 text-stone-700 font-bold py-2 rounded-xl text-xs transition">
+                    Volver al Resumen
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANEL LATERAL DEL CARRITO UNIFICADO -->
+    <div id="panel-carrito" class="fixed inset-y-0 right-0 max-w-md w-full bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="p-5 bg-frutti-chocolate text-white flex justify-between items-center border-b-4 border-frutti-amarillo">
+            <h3 class="font-black text-lg font-serif flex items-center space-x-2">
+                <i class="fa-solid fa-basket-shopping text-frutti-amarillo"></i>
+                <span>Tu Pedido Frutal</span>
+            </h3>
+            <button onclick="toggleCarrito()" class="text-stone-300 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div id="contenido-resumen-scroll" class="flex-1 overflow-y-auto p-5 space-y-6 bg-stone-50 transition-all duration-300">
+            <div class="flex justify-end">
+                <button onclick="eliminarPedidoCompleto()" class="bg-red-100 hover:bg-red-200 text-frutti-rojo font-bold px-3.5 py-2 rounded-xl text-xs transition flex items-center space-x-1.5 shadow-sm transform hover:scale-105 active:scale-95">
+                    <i class="fa-solid fa-trash-can"></i>
+                    <span>Eliminar Pedido</span>
+                </button>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-xs uppercase text-stone-500 mb-3 tracking-wider">Productos Seleccionados</h4>
+                <div id="carrito-items" class="space-y-3">
+                    <p class="text-stone-400 text-center py-6 text-sm">Tu pedido está vacío.</p>
+                </div>
+            </div>
+
+            <div class="border-t border-stone-200 pt-4">
+                <button onclick="abrirModalExtras()" class="w-full bg-amber-500 hover:bg-amber-600 text-stone-900 font-black py-2.5 rounded-xl shadow flex items-center justify-center space-x-2 transition text-xs">
+                    <i class="fa-solid fa-gift"></i>
+                    <span>✨ Añadir Extras (Globos y Carteles)</span>
+                </button>
+                <div id="resumen-extras-container" class="text-xs text-stone-600 font-medium mt-3 bg-amber-50 border border-amber-200 rounded-xl p-3 hidden">
+                    <span class="font-bold text-frutti-chocolate block mb-1">Extras seleccionados:</span>
+                    <p id="texto-extras-resumen" class="text-stone-800 font-semibold"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-5 bg-white border-t border-stone-200 shadow-lg space-y-3">
+            <div class="space-y-1 text-sm">
+                <div class="flex justify-between text-stone-600">
+                    <span>Subtotal:</span>
+                    <span id="subtotal-arreglos">$0.00</span>
+                </div>
+                <div class="flex justify-between text-stone-600">
+                    <span>Extras:</span>
+                    <span id="subtotal-extras">$0.00</span>
+                </div>
+                <div class="flex justify-between font-black text-xl text-stone-900 pt-2 border-t border-stone-200">
+                    <span>Total:</span>
+                    <span id="carrito-total" class="text-frutti-rojo">$0.00</span>
+                </div>
+            </div>
+
+            <button onclick="mostrarRecordatorioDelivery()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-2xl shadow-lg flex items-center justify-center space-x-2 transition transform hover:scale-[1.02]">
+                <i class="fa-brands fa-whatsapp text-2xl"></i>
+                <span class="text-xs sm:text-sm font-black uppercase">Enviar Pedido por WhatsApp</span>
+            </button>
+
+            <a href="index.html" class="w-full bg-stone-200 hover:bg-stone-300 text-stone-700 font-bold py-2.5 rounded-xl text-xs transition flex items-center justify-center space-x-2">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Volver al Catálogo Principal</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-stone-400 py-6 text-center text-xs border-t border-stone-800 mt-12">
+        <p class="text-white font-bold">Frutti-Choe Quito &copy; 2026 - Desayunos Sorpresa</p>
+    </footer>
+
+    <!-- SCRIPT DE CÁLCULO INTERNO CON GANANCIA DE $9.00 Y MARGEN DE DECORACIÓN -->
+    <script>
+        let carritoArreglos = JSON.parse(localStorage.getItem('frutti_carrito')) || [];
+        let extrasSeleccionados = JSON.parse(localStorage.getItem('frutti_extras')) || { globo: 'Ninguno', cartel: 'Ninguno' };
+        
+        let seleccionArmador = [];
+        let precioArmadorBase = 0;
+
+        // Variables temporales para el flujo de decoración
+        let itemTemporalNombre = '';
+        let itemTemporalPrecioBase = 0;
+        let esArmadoPersonalizado = false;
+        let adicionalDecoracionActual = 0;
+
+        function toggleOpcionItem(elemento, nombre, precio) {
+            elemento.classList.toggle('selected');
+            const index = seleccionArmador.findIndex(i => i.nombre === nombre);
+            if (index > -1) {
+                seleccionArmador.splice(index, 1);
+            } else {
+                seleccionArmador.push({ nombre, precio });
+            }
+        }
+
+        function finalizarDesayuno() {
+            const sumaIngredientes = seleccionArmador.reduce((sum, item) => sum + item.precio, 0);
+            // Suma de los ingredientes seleccionados + $9.00 de margen de ganancia estándar
+            precioArmadorBase = sumaIngredientes > 0 ? sumaIngredientes + 9.00 : 0;
+            
+            document.getElementById('armar-precio-total').innerText = `$${precioArmadorBase.toFixed(2)}`;
+            
+            const btnAgregar = document.getElementById('btn-agregar-personalizado');
+            if (seleccionArmador.length > 0) {
+                btnAgregar.disabled = false;
+                btnAgregar.classList.remove('bg-stone-400', 'opacity-60', 'cursor-not-allowed');
+                btnAgregar.classList.add('bg-emerald-600', 'hover:bg-emerald-700', 'cursor-pointer');
+            } else {
+                btnAgregar.disabled = true;
+                btnAgregar.classList.add('bg-stone-400', 'opacity-60', 'cursor-not-allowed');
+                btnAgregar.classList.remove('bg-emerald-600', 'hover:bg-emerald-700', 'cursor-pointer');
+            }
+        }
+
+        // 1. Flujo para opciones prediseñadas del catálogo
+        function iniciarSeleccionPredisponida(nombre, precio) {
+            itemTemporalNombre = nombre;
+            itemTemporalPrecioBase = precio;
+            esArmadoPersonalizado = false;
+            abrirModalDecoracion();
+        }
+
+        // 2. Flujo para desayuno armado personalizado
+        function abrirModalDecoracionParaArmado() {
+            if (seleccionArmador.length === 0) return;
+            const nombresItems = seleccionArmador.map(i => i.nombre).join(' + ');
+            itemTemporalNombre = `Desayuno Armado (${nombresItems})`;
+            itemTemporalPrecioBase = precioArmadorBase;
+            esArmadoPersonalizado = true;
+            abrirModalDecoracion();
+        }
+
+        function abrirModalDecoracion() {
+            // Seleccionar por defecto el Modelo 01 (+3.50 interno)
+            const radioDefault = document.querySelector('input[name="modelo_dec"][value="Modelo 01"]');
+            if (radioDefault) {
+                radioDefault.checked = true;
+                destacarCardDecoracion('Modelo 01', 3.50);
+            }
+            document.getElementById('modal-decoracion').classList.remove('hidden');
+        }
+
+        function cerrarModalDecoracion() {
+            document.getElementById('modal-decoracion').classList.add('hidden');
+        }
+
+        function seleccionarDecoracionCard(nombreModelo, adicional) {
+            const radio = document.querySelector(`input[name="modelo_dec"][value="${nombreModelo}"]`);
+            if (radio) {
+                radio.checked = true;
+                destacarCardDecoracion(nombreModelo, adicional);
+            }
+        }
+
+        function destacarCardDecoracion(nombreModelo, adicional) {
+            adicionalDecoracionActual = adicional;
+            document.querySelectorAll('.decoracion-card').forEach(card => {
+                card.classList.remove('selected');
+                if (card.innerText.includes(nombreModelo)) {
+                    card.classList.add('selected');
+                }
+            });
+        }
+
+        function confirmarPedidoConDecoracion() {
+            const modeloSeleccionado = document.querySelector('input[name="modelo_dec"]:checked').value;
+            const nombreFinalConDecoracion = `${itemTemporalNombre} [Decoración: ${modeloSeleccionado}]`;
+            
+            // Precio final incluyendo el adicional interno de la decoración elegida (+3.50, +3.00 o +1.50)
+            const precioFinalConDecoracion = itemTemporalPrecioBase + adicionalDecoracionActual;
+
+            agregarAlCarrito(nombreFinalConDecoracion, precioFinalConDecoracion);
+            cerrarModalDecoracion();
+            if (esArmadoPersonalizado) {
+                cerrarModalArmador();
+            }
+            toggleCarrito();
+        }
+
+        function abrirModalArmador() { document.getElementById('modal-armador').classList.remove('hidden'); }
+        function cerrarModalArmador() { document.getElementById('modal-armador').classList.add('hidden'); }
+        function abrirModalExtras() { document.getElementById('modal-extras').classList.remove('hidden'); }
+        function cerrarModalExtras() { document.getElementById('modal-extras').classList.add('hidden'); }
+
+        function abrirZoom(urlImg, titulo) {
+            document.getElementById('zoom-img-src').src = urlImg;
+            document.getElementById('zoom-titulo').innerText = titulo;
+            document.getElementById('modal-zoom').classList.remove('hidden');
+        }
+
+        function cerrarZoom() { document.getElementById('modal-zoom').classList.add('hidden'); }
+
+        function guardarExtras() {
+            const globoSeleccionado = document.querySelector('input[name="globo"]:checked').value;
+            const cartelSeleccionado = document.querySelector('input[name="cartel"]:checked').value;
+            extrasSeleccionados = { globo: globoSeleccionado, cartel: cartelSeleccionado };
+            guardarYActualizar();
+            cerrarModalExtras();
+        }
+
+        function sinExtras() {
+            extrasSeleccionados = { globo: 'Ninguno', cartel: 'Ninguno' };
+            const radioGlobo = document.querySelector('input[name="globo"][value="Ninguno"]');
+            if (radioGlobo) radioGlobo.checked = true;
+            const radioCartel = document.querySelector('input[name="cartel"][value="Ninguno"]');
+            if (radioCartel) radioCartel.checked = true;
+            guardarYActualizar();
+            cerrarModalExtras();
+        }
+
+        function eliminarPedidoCompleto() {
+            const contenedorScroll = document.getElementById('contenido-resumen-scroll');
+            contenedorScroll.classList.add('animar-borrado');
+            setTimeout(() => {
+                carritoArreglos = [];
+                extrasSeleccionados = { globo: 'Ninguno', cartel: 'Ninguno' };
+                guardarYActualizar();
+                contenedorScroll.classList.remove('animar-borrado');
+            }, 300);
+        }
+
+        function agregarAlCarrito(nombre, precio) {
+            const existe = carritoArreglos.find(item => item.nombre === nombre);
+            if (existe) {
+                existe.cantidad++;
+            } else {
+                carritoArreglos.push({ nombre, precio, cantidad: 1 });
+            }
+            guardarYActualizar();
+        }
+
+        function cambiarCantidad(index, cambio) {
+            carritoArreglos[index].cantidad += cambio;
+            if (carritoArreglos[index].cantidad <= 0) {
+                carritoArreglos.splice(index, 1);
+            }
+            guardarYActualizar();
+        }
+
+        function guardarYActualizar() {
+            localStorage.setItem('frutti_carrito', JSON.stringify(carritoArreglos));
+            localStorage.setItem('frutti_extras', JSON.stringify(extrasSeleccionados));
+            actualizarTotal();
+        }
+
+        function actualizarTotal() {
+            const contenedorItems = document.getElementById('carrito-items');
+            const contador = document.getElementById('contador-carrito');
+            const contenedorExtrasResumen = document.getElementById('resumen-extras-container');
+            const textoExtrasResumen = document.getElementById('texto-extras-resumen');
+            
+            let totalItemsCount = 0;
+            let subtotalArreglos = 0;
+
+            if (carritoArreglos.length === 0) {
+                contenedorItems.innerHTML = `<p class="text-stone-400 text-center py-4 text-xs">Tu pedido está vacío.</p>`;
+            } else {
+                contenedorItems.innerHTML = '';
+                carritoArreglos.forEach((item, index) => {
+                    totalItemsCount += item.cantidad;
+                    subtotalArreglos += item.precio * item.cantidad;
+                    contenedorItems.innerHTML += `
+                        <div class="flex items-center justify-between bg-white p-2.5 rounded-xl shadow-sm border border-stone-200">
+                            <div>
+                                <h5 class="font-bold text-xs text-stone-900">${item.nombre}</h5>
+                                <span class="text-[11px] text-frutti-verde font-bold">$${item.precio.toFixed(2)} c/u</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button onclick="cambiarCantidad(${index}, -1)" class="w-5 h-5 bg-stone-200 text-stone-800 rounded-md font-bold text-xs flex items-center justify-center">-</button>
+                                <span class="text-xs font-bold">${item.cantidad}</span>
+                                <button onclick="cambiarCantidad(${index}, 1)" class="w-5 h-5 bg-stone-200 text-stone-800 rounded-md font-bold text-xs flex items-center justify-center">+</button>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            contador.innerText = totalItemsCount;
+
+            if (extrasSeleccionados.globo !== 'Ninguno' || extrasSeleccionados.cartel !== 'Ninguno') {
+                contenedorExtrasResumen.classList.remove('hidden');
+                let extrasText = [];
+                if (extrasSeleccionados.globo !== 'Ninguno') extrasText.push(extrasSeleccionados.globo);
+                if (extrasSeleccionados.cartel !== 'Ninguno') extrasText.push(extrasSeleccionados.cartel);
+                textoExtrasResumen.textContent = extrasText.join(' + ');
+            } else {
+                contenedorExtrasResumen.classList.add('hidden');
+            }
+
+            let subtotalExtras = 0;
+            if (extrasSeleccionados.globo) {
+                if (extrasSeleccionados.globo.includes('3.00')) subtotalExtras += 3.00;
+                else if (extrasSeleccionados.globo.includes('1.50')) subtotalExtras += 1.50;
+                else if (extrasSeleccionados.globo.includes('1.00')) subtotalExtras += 1.00;
+            }
+            if (extrasSeleccionados.cartel && extrasSeleccionados.cartel !== 'Ninguno') {
+                subtotalExtras += 1.50;
+            }
+
+            const totalFinal = subtotalArreglos + subtotalExtras;
+
+            document.getElementById('subtotal-arreglos').innerText = `$${subtotalArreglos.toFixed(2)}`;
+            document.getElementById('subtotal-extras').innerText = `$${subtotalExtras.toFixed(2)}`;
+            document.getElementById('carrito-total').innerText = `$${totalFinal.toFixed(2)}`;
+        }
+
+        function toggleCarrito() {
+            document.getElementById('panel-carrito').classList.toggle('translate-x-full');
+        }
+
+        function mostrarRecordatorioDelivery() {
+            if (carritoArreglos.length === 0) {
+                alert("Por favor añade al menos un producto a tu pedido.");
+                return;
+            }
+            document.getElementById('modal-recordatorio-delivery').classList.remove('hidden');
+        }
+
+        function cerrarRecordatorioDelivery() {
+            document.getElementById('modal-recordatorio-delivery').classList.add('hidden');
+        }
+
+        function confirmarYEnviarWhatsApp() {
+            cerrarRecordatorioDelivery();
+
+            let mensaje = "¡Hola! Deseo realizar el siguiente pedido de *Desayunos en Frutti-Choe*:%0A%0A";
+            mensaje += "*--- PRODUCTOS SELECCIONADOS ---*%0A";
+
+            let subtotalArreglos = 0;
+            carritoArreglos.forEach(item => {
+                const sub = item.precio * item.cantidad;
+                subtotalArreglos += sub;
+                mensaje += `• ${item.nombre} x${item.cantidad} - $${sub.toFixed(2)}%0A`;
+            });
+
+            let subtotalExtras = 0;
+            if (extrasSeleccionados.globo !== 'Ninguno' || extrasSeleccionados.cartel !== 'Ninguno') {
+                mensaje += `%0A*--- EXTRAS AÑADIDOS ---*%0A`;
+                if (extrasSeleccionados.globo !== 'Ninguno') {
+                    mensaje += `• ${extrasSeleccionados.globo}%0A`;
+                    if (extrasSeleccionados.globo.includes('3.00')) subtotalExtras += 3.00;
+                    else if (extrasSeleccionados.globo.includes('1.50')) subtotalExtras += 1.50;
+                    else if (extrasSeleccionados.globo.includes('1.00')) subtotalExtras += 1.00;
+                }
+                if (extrasSeleccionados.cartel !== 'Ninguno') {
+                    mensaje += `• ${extrasSeleccionados.cartel}%0A`;
+                    subtotalExtras += 1.50;
+                }
+            }
+
+            const totalGeneral = subtotalArreglos + subtotalExtras;
+            mensaje += `%0A*VALOR TOTAL A PAGAR: $${totalGeneral.toFixed(2)}*%0A%0A_🛵 Nota: Por favor me ayudan confirmando el costo exacto del Servicio a Domicilio según mi dirección exacta en Quito._%0A%0A¿Me confirman la disponibilidad y métodos de pago?`;
+
+            const numeroWhatsApp = "593959040348";
+            window.open(`https://wa.me/${numeroWhatsApp}?text=${mensaje}`, '_blank');
+        }
+
+        document.addEventListener('DOMContentLoaded', actualizarTotal);
+    </script>
+</body>
+</html>

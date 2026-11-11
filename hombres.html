@@ -76,7 +76,7 @@
                 Arreglos para Hombre
             </h2>
             <p class="text-stone-600 text-sm mt-2 max-w-xl mx-auto">
-                Diseños elegantes, colores sobrios y combinaciones frutales perfectas para papá, novio, esposo o amigos.
+                Diseños elegantes, colores sobrios y combinaciones frutales perfectas para papá, novio, esposo o amigos. Haz clic en la imagen de cualquier arreglo para ver los detalles y añadirlo a tu pedido.
             </p>
         </div>
 
@@ -86,33 +86,56 @@
         </div>
     </main>
 
-    <!-- MODAL DE EXTRAS ACTUALIZADO CON NUEVOS PRECIOS Y ZOOM -->
+    <!-- MODAL ESTILO TARJETA (REFERENCIA EXACTA A TU IMAGEN) -->
+    <div id="modal-detalle-arreglo" class="fixed inset-0 z-[1000] bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="relative max-w-lg w-full bg-white rounded-3xl p-6 shadow-2xl flex flex-col items-center">
+            
+            <!-- Botón Cerrar "X" -->
+            <button onclick="cerrarModalDetalle()" class="absolute top-4 right-4 text-stone-500 hover:text-stone-900 text-xl font-bold bg-stone-100 rounded-full w-10 h-10 flex items-center justify-center shadow transition">
+                &times;
+            </button>
+
+            <!-- Imagen Grande -->
+            <div class="w-full h-72 sm:h-80 rounded-2xl overflow-hidden bg-stone-100 mb-5 flex items-center justify-center shadow-inner">
+                <img id="modal-img-src" src="" alt="Arreglo" class="w-full h-full object-cover">
+            </div>
+
+            <!-- Nombre y Precio -->
+            <h3 id="modal-titulo" class="text-2xl font-black text-stone-900 font-serif mb-1 text-center"></h3>
+            <p id="modal-precio" class="text-2xl font-black text-frutti-rojo mb-6"></p>
+
+            <!-- Botón Añadir al Pedido -->
+            <button id="modal-btn-agregar" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black py-4 rounded-2xl shadow-lg flex items-center justify-center space-x-2 transition transform hover:scale-[1.01] uppercase tracking-wider text-sm cursor-pointer">
+                <i class="fa-solid fa-cart-plus text-lg"></i>
+                <span>Añadir al Pedido</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL DE EXTRAS CON ZOOM PARA GLOBOS -->
     <div id="modal-extras" class="fixed inset-0 bg-black/75 z-[999] hidden flex items-center justify-center p-4 backdrop-blur-sm">
         <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl relative border-4 border-frutti-amarillo max-h-[90vh] overflow-y-auto">
             <button onclick="cerrarModalExtras()" class="absolute top-3 right-4 text-stone-400 hover:text-stone-700 text-xl font-bold">&times;</button>
             <h3 class="font-black text-xl text-stone-900 font-serif mb-1 text-center">Personaliza tu Detalle</h3>
-            <p class="text-xs text-stone-500 text-center mb-5">Elige globos o carteles especiales para complementar tu sorpresa. (Haz clic en la lupa para ampliar modelos).</p>
+            <p class="text-xs text-stone-500 text-center mb-5">Elige globos o carteles especiales para complementar tu sorpresa.</p>
 
             <div class="space-y-6">
                 <!-- SECCIÓN GLOBOS -->
                 <div>
                     <h4 class="font-bold text-xs text-frutti-verde uppercase tracking-wider mb-3">🎈 SELECCIONA UN GLOBO OPCIONAL:</h4>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                        
-                        <!-- Sin Globo -->
                         <label class="flex items-center space-x-3 p-3 rounded-2xl border border-stone-200 hover:border-frutti-verde hover:bg-emerald-50/50 cursor-pointer transition">
                             <input type="radio" name="globo" value="Ninguno" checked class="text-frutti-verde">
                             <div class="w-12 h-12 rounded-xl bg-stone-100 flex items-center justify-center text-xl text-stone-400 flex-shrink-0">🚫</div>
                             <span class="font-bold text-stone-800">Sin Globo adicional</span>
                         </label>
 
-                        <!-- Globo Burbuja 01 ($3.00) -->
                         <label class="flex items-center justify-between p-3 rounded-2xl border border-stone-200 hover:border-frutti-verde hover:bg-emerald-50/50 cursor-pointer transition">
                             <div class="flex items-center space-x-3">
                                 <input type="radio" name="globo" value="Globo Burbuja Feliz Cumpleaños 01 (+$3.00)" class="text-frutti-verde">
                                 <div class="relative group">
                                     <img src="EXTRAS/Globos/GloboBurbujaFelizCumpleaños01.jpg" alt="Globo 1" class="w-12 h-12 rounded-xl object-cover border border-stone-200 flex-shrink-0" onerror="this.src='Logo.jpeg'">
-                                    <button type="button" onclick="event.preventDefault(); abrirZoom('EXTRAS/Globos/GloboBurbujaFelizCumpleaños01.jpg', 'Globo Burbuja 01')" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white rounded-xl transition text-xs"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+                                    <button type="button" onclick="event.preventDefault(); abrirZoomGlobo('EXTRAS/Globos/GloboBurbujaFelizCumpleaños01.jpg', 'Globo Burbuja 01')" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white rounded-xl transition text-xs"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
                                 </div>
                                 <div>
                                     <span class="font-bold text-stone-900 block">Burbuja 01</span>
@@ -121,13 +144,12 @@
                             </div>
                         </label>
 
-                        <!-- Globo Burbuja 02 ($3.00) -->
                         <label class="flex items-center justify-between p-3 rounded-2xl border border-stone-200 hover:border-frutti-verde hover:bg-emerald-50/50 cursor-pointer transition">
                             <div class="flex items-center space-x-3">
                                 <input type="radio" name="globo" value="Globo Burbuja Feliz Cumpleaños 02 (+$3.00)" class="text-frutti-verde">
                                 <div class="relative group">
                                     <img src="EXTRAS/Globos/GloboBurbujaFelizCumpleaños02.jpg" alt="Globo 2" class="w-12 h-12 rounded-xl object-cover border border-stone-200 flex-shrink-0" onerror="this.src='Logo.jpeg'">
-                                    <button type="button" onclick="event.preventDefault(); abrirZoom('EXTRAS/Globos/GloboBurbujaFelizCumpleaños02.jpg', 'Globo Burbuja 02')" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white rounded-xl transition text-xs"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+                                    <button type="button" onclick="event.preventDefault(); abrirZoomGlobo('EXTRAS/Globos/GloboBurbujaFelizCumpleaños02.jpg', 'Globo Burbuja 02')" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white rounded-xl transition text-xs"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
                                 </div>
                                 <div>
                                     <span class="font-bold text-stone-900 block">Burbuja 02</span>
@@ -136,13 +158,12 @@
                             </div>
                         </label>
 
-                        <!-- Globo Corazón Grande ($1.50) -->
                         <label class="flex items-center justify-between p-3 rounded-2xl border border-stone-200 hover:border-frutti-verde hover:bg-emerald-50/50 cursor-pointer transition">
                             <div class="flex items-center space-x-3">
                                 <input type="radio" name="globo" value="Globo Corazón Grande (+$1.50)" class="text-frutti-verde">
                                 <div class="relative group">
                                     <img src="EXTRAS/Globos/GlobosCorazonGrande.jpg" alt="Globo Corazón" class="w-12 h-12 rounded-xl object-cover border border-stone-200 flex-shrink-0" onerror="this.src='Logo.jpeg'">
-                                    <button type="button" onclick="event.preventDefault(); abrirZoom('EXTRAS/Globos/GlobosCorazonGrande.jpg', 'Globo Corazón Grande')" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white rounded-xl transition text-xs"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+                                    <button type="button" onclick="event.preventDefault(); abrirZoomGlobo('EXTRAS/Globos/GlobosCorazonGrande.jpg', 'Globo Corazón Grande')" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white rounded-xl transition text-xs"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
                                 </div>
                                 <div>
                                     <span class="font-bold text-stone-900 block">Corazón Grande</span>
@@ -151,13 +172,12 @@
                             </div>
                         </label>
 
-                        <!-- Globo Pequeño ($1.00) -->
                         <label class="flex items-center justify-between p-3 rounded-2xl border border-stone-200 hover:border-frutti-verde hover:bg-emerald-50/50 cursor-pointer transition sm:col-span-2">
                             <div class="flex items-center space-x-3">
                                 <input type="radio" name="globo" value="Globo Pequeño (+$1.00)" class="text-frutti-verde">
                                 <div class="relative group">
                                     <img src="EXTRAS/Globos/GlobosFelizCumpleañosPequeño.jpg" alt="Globo Pequeño" class="w-12 h-12 rounded-xl object-cover border border-stone-200 flex-shrink-0" onerror="this.src='Logo.jpeg'">
-                                    <button type="button" onclick="event.preventDefault(); abrirZoom('EXTRAS/Globos/GlobosFelizCumpleañosPequeño.jpg', 'Globo Pequeño (Variedad)')" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white rounded-xl transition text-xs"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+                                    <button type="button" onclick="event.preventDefault(); abrirZoomGlobo('EXTRAS/Globos/GlobosFelizCumpleañosPequeño.jpg', 'Globo Pequeño')" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white rounded-xl transition text-xs"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
                                 </div>
                                 <div>
                                     <span class="font-bold text-stone-900 block">Globo Pequeño (Variedad de Modelos)</span>
@@ -165,7 +185,6 @@
                                 </div>
                             </div>
                         </label>
-
                     </div>
                 </div>
 
@@ -188,7 +207,7 @@
                         </label>
                         <label class="flex items-center space-x-3 p-3 rounded-2xl border border-stone-200 hover:border-frutti-chocolate hover:bg-amber-50/50 cursor-pointer transition">
                             <input type="radio" name="cartel" value="Cartel Feliz Días (+$1.50)" class="text-frutti-chocolate">
-                            <img src="EXTRAS/Carteles de Fomix/FelizDias" alt="Cartel Feliz Días" class="w-12 h-12 rounded-xl object-cover border border-stone-200 flex-shrink-0" onerror="this.src='Logo.jpeg'">
+                            <img src="EXTRAS/Carteles de Fomix/FelizDias.jpg" alt="Cartel Feliz Días" class="w-12 h-12 rounded-xl object-cover border border-stone-200 flex-shrink-0" onerror="this.src='Logo.jpeg'">
                             <div>
                                 <span class="font-bold text-stone-900 block">Cartel Feliz Días</span>
                                 <span class="text-frutti-chocolate font-black">+$1.50</span>
@@ -198,7 +217,6 @@
                 </div>
             </div>
 
-            <!-- Botones del Modal de Extras -->
             <div class="mt-6 space-y-2">
                 <button onclick="guardarExtras()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow transition text-xs">
                     Confirmar Extras y Actualizar Pedido
@@ -210,13 +228,13 @@
         </div>
     </div>
 
-    <!-- MODAL DE ZOOM PARA VER IMÁGENES DE GLOBOS -->
-    <div id="modal-zoom" class="fixed inset-0 z-[1000] bg-black/90 hidden flex items-center justify-center p-4">
+    <!-- MODAL ZOOM ESPECÍFICO PARA GLOBOS -->
+    <div id="modal-zoom-globo" class="fixed inset-0 z-[1050] bg-black/90 hidden flex items-center justify-center p-4">
         <div class="relative max-w-lg w-full bg-white rounded-3xl p-4 text-center shadow-2xl">
-            <button onclick="cerrarZoom()" class="absolute top-3 right-4 text-stone-500 hover:text-red-600 text-2xl font-bold bg-stone-100 rounded-full w-10 h-10 flex items-center justify-center shadow">&times;</button>
-            <h4 id="zoom-titulo" class="font-black text-stone-900 font-serif text-lg mb-3"></h4>
+            <button onclick="cerrarZoomGlobo()" class="absolute top-3 right-4 text-stone-500 hover:text-red-600 text-2xl font-bold bg-stone-100 rounded-full w-10 h-10 flex items-center justify-center shadow">&times;</button>
+            <h4 id="zoom-globo-titulo" class="font-black text-stone-900 font-serif text-lg mb-3"></h4>
             <div class="rounded-2xl overflow-hidden bg-stone-100 flex items-center justify-center max-h-[70vh]">
-                <img id="zoom-img-src" src="" alt="Zoom Globo" class="w-full object-contain max-h-[65vh]">
+                <img id="zoom-globo-img-src" src="" alt="Zoom Globo" class="w-full object-contain max-h-[65vh]">
             </div>
         </div>
     </div>
@@ -224,9 +242,7 @@
     <!-- MODAL RECORDATORIO SERVICIO A DOMICILIO -->
     <div id="modal-recordatorio-delivery" class="fixed inset-0 z-[999] bg-black/80 hidden flex items-center justify-center p-4 backdrop-blur-sm">
         <div class="bg-white rounded-3xl max-w-md w-full p-6 text-center shadow-2xl relative border-4 border-amber-400">
-            <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-3">
-                🛵
-            </div>
+            <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-3">🛵</div>
             <h3 class="font-black text-xl text-stone-900 font-serif mb-2">¡Verifica tu Servicio a Domicilio!</h3>
             <p class="text-stone-600 text-xs mb-4 leading-relaxed font-medium">
                 Recuerda que el <strong>Servicio a Domicilio tiene un costo adicional</strong> según tu ubicación exacta en Quito. 
@@ -317,7 +333,7 @@
         <p class="text-white font-bold">Frutti-Choe Quito &copy; 2026 - Regalos para Hombre</p>
     </footer>
 
-    <!-- SCRIPT ORIGINAL CON CLAVE UNIFICADA Y NUEVOS GLOBOS -->
+    <!-- SCRIPT CON VENTANA MODAL ESTILO TARJETA -->
     <script>
         const modelosHombres = [
             { nombre: "Caja Feliz", precio: 24.00, imagen: "Modelos Hombres/Caja-Feliz.jpg" },
@@ -330,7 +346,6 @@
             { nombre: "Jarrón Especial H", precio: 15.00, imagen: "Modelos Hombres/JarronH.jpg" }
         ];
 
-        // MEMORIA UNIFICADA CON TODAS LAS PÁGINAS
         let carritoArreglos = JSON.parse(localStorage.getItem('frutti_carrito')) || [];
         let extrasSeleccionados = JSON.parse(localStorage.getItem('frutti_extras')) || { globo: 'Ninguno', cartel: 'Ninguno' };
 
@@ -340,14 +355,20 @@
 
             modelosHombres.forEach(arreglo => {
                 contenedor.innerHTML += `
-                    <div class="bg-white rounded-3xl shadow-lg border-2 border-stone-200 overflow-hidden flex flex-col justify-between hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 group">
-                        <div class="relative h-56 bg-stone-100 overflow-hidden flex items-center justify-center">
+                    <div class="bg-white rounded-3xl shadow-lg border-2 border-stone-200 overflow-hidden flex flex-col justify-between hover:shadow-2xl transition-all duration-300 group">
+                        
+                        <!-- Imagen con clic para abrir modal estilo tarjeta -->
+                        <div onclick="abrirModalDetalle('${arreglo.nombre}', ${arreglo.precio}, '${arreglo.imagen}')" class="relative h-56 bg-stone-100 overflow-hidden flex items-center justify-center cursor-pointer">
                             <img src="${arreglo.imagen}" 
                                  alt="${arreglo.nombre}" 
                                  class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                                  onerror="this.src='Logo.jpeg'">
+                            <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold text-xs">
+                                <i class="fa-solid fa-magnifying-glass-plus text-xl mr-2"></i> Ver Detalle
+                            </div>
                         </div>
 
+                        <!-- Información y botones -->
                         <div class="p-4 flex flex-col justify-between flex-1 bg-white">
                             <div>
                                 <h3 class="font-bold text-lg text-stone-900 font-serif mb-1">${arreglo.nombre}</h3>
@@ -356,7 +377,7 @@
                             <div class="mt-4 pt-3 border-t border-stone-100 flex items-center justify-between">
                                 <span class="text-xl font-black text-frutti-rojo">$${arreglo.precio.toFixed(2)}</span>
                                 <button onclick="agregarAlCarrito('${arreglo.nombre}', ${arreglo.precio})" 
-                                        class="bg-frutti-chocolate hover:bg-stone-800 text-white font-bold px-3.5 py-1.5 rounded-xl text-xs flex items-center space-x-1 shadow transition">
+                                        class="bg-frutti-chocolate hover:bg-stone-800 text-white font-bold px-3.5 py-1.5 rounded-xl text-xs flex items-center space-x-1 shadow transition cursor-pointer">
                                     <i class="fa-solid fa-cart-plus"></i>
                                     <span>Añadir</span>
                                 </button>
@@ -378,18 +399,38 @@
             actualizarTotal();
         }
 
+        // FUNCIONES DEL MODAL DE DETALLE (ESTILO TU IMAGEN)
+        function abrirModalDetalle(nombre, precio, imagen) {
+            document.getElementById('modal-img-src').src = imagen;
+            document.getElementById('modal-titulo').innerText = nombre;
+            document.getElementById('modal-precio').innerText = `$${precio.toFixed(2)}`;
+            
+            const btnAgregar = document.getElementById('modal-btn-agregar');
+            btnAgregar.onclick = function() {
+                agregarAlCarrito(nombre, precio);
+                cerrarModalDetalle();
+            };
+
+            document.getElementById('modal-detalle-arreglo').classList.remove('hidden');
+        }
+
+        function cerrarModalDetalle() {
+            document.getElementById('modal-detalle-arreglo').classList.add('hidden');
+        }
+
+        // FUNCIONES DE ZOOM PARA GLOBOS
+        function abrirZoomGlobo(urlImg, titulo) {
+            document.getElementById('zoom-globo-img-src').src = urlImg;
+            document.getElementById('zoom-globo-titulo').innerText = titulo;
+            document.getElementById('modal-zoom-globo').classList.remove('hidden');
+        }
+
+        function cerrarZoomGlobo() {
+            document.getElementById('modal-zoom-globo').classList.add('hidden');
+        }
+
         function abrirModalExtras() { document.getElementById('modal-extras').classList.remove('hidden'); }
         function cerrarModalExtras() { document.getElementById('modal-extras').classList.add('hidden'); }
-
-        function abrirZoom(urlImg, titulo) {
-            document.getElementById('zoom-img-src').src = urlImg;
-            document.getElementById('zoom-titulo').innerText = titulo;
-            document.getElementById('modal-zoom').classList.remove('hidden');
-        }
-
-        function cerrarZoom() {
-            document.getElementById('modal-zoom').classList.add('hidden');
-        }
 
         function guardarExtras() {
             const globoSeleccionado = document.querySelector('input[name="globo"]:checked').value;
@@ -434,6 +475,7 @@
                 carritoArreglos.push({ nombre, precio, cantidad: 1 });
             }
             guardarYActualizar();
+            toggleCarrito();
         }
 
         function cambiarCantidad(index, cambio) {
@@ -460,7 +502,7 @@
             let subtotalArreglos = 0;
 
             if (carritoArreglos.length === 0) {
-                contenedorItems.innerHTML = `<p class="text-stone-400 text-center py-4 text-xs">Tu pedido está vacío.</p>`;
+                contenedorItems.innerHTML = `<p class="text-stone-400 text-center py-4 text-sm">Tu pedido está vacío.</p>`;
             } else {
                 contenedorItems.innerHTML = '';
                 carritoArreglos.forEach((item, index) => {
@@ -495,7 +537,6 @@
                 contenedorExtrasResumen.classList.add('hidden');
             }
 
-            // CÁLCULO DE EXTRAS ACTUALIZADO DE GLOBOS
             let subtotalExtras = 0;
             if (extrasSeleccionados.globo.includes('3.00')) subtotalExtras += 3.00;
             else if (extrasSeleccionados.globo.includes('1.50')) subtotalExtras += 1.50;
@@ -503,11 +544,11 @@
 
             if (extrasSeleccionados.cartel !== 'Ninguno') subtotalExtras += 1.50;
 
-            const totalFinal = subtotalArreglos + subtotalExtras;
+            const totalGeneral = subtotalArreglos + subtotalExtras;
 
             document.getElementById('subtotal-arreglos').innerText = `$${subtotalArreglos.toFixed(2)}`;
             document.getElementById('subtotal-extras').innerText = `$${subtotalExtras.toFixed(2)}`;
-            document.getElementById('carrito-total').innerText = `$${totalFinal.toFixed(2)}`;
+            document.getElementById('carrito-total').innerText = `$${totalGeneral.toFixed(2)}`;
         }
 
         function toggleCarrito() {
@@ -530,7 +571,7 @@
             cerrarRecordatorioDelivery();
 
             let mensaje = "¡Hola! Deseo realizar el siguiente pedido en *Frutti-Choe*:%0A%0A";
-            mensaje += "*--- PRODUCTOS SELECCIONADOS ---*%0A";
+            mensaje += "*--- ARREGLOS SELECCIONADOS ---*%0A";
 
             let subtotalArreglos = 0;
             carritoArreglos.forEach(item => {
@@ -555,7 +596,7 @@
             }
 
             const totalGeneral = subtotalArreglos + subtotalExtras;
-            mensaje += `%0A*VALOR TOTAL A PAGAR: $${totalGeneral.toFixed(2)}*%0A%0A_🛵 Nota: Por favor me ayudan confirmando el costo exacto del Servicio a Domicilio según mi dirección exacta en Quito._%0A%0A¿Me confirman la disponibilidad y métodos de pago?`;
+            mensaje += `%0A*TOTAL GENERAL A PAGAR: $${totalGeneral.toFixed(2)}*%0A%0A*(Nota: El valor del domicilio se acordará con el asesor según la ubicación en Quito)*%0A%0A¿Me confirman la disponibilidad por favor?`;
 
             const numeroWhatsApp = "593959040348";
             window.open(`https://wa.me/${numeroWhatsApp}?text=${mensaje}`, '_blank');

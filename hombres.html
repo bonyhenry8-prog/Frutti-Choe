@@ -76,7 +76,7 @@
                 Arreglos para Hombre
             </h2>
             <p class="text-stone-600 text-sm mt-2 max-w-xl mx-auto">
-                Diseños elegantes, colores sobrios y combinaciones frutales perfectas para papá, novio, esposo o amigos. Haz clic en la imagen de cualquier arreglo para ver los detalles y añadirlo a tu pedido.
+                Diseños elegantes, colores sobrios y combinaciones frutales perfectas para papá, novio, esposo o amigos. Toca la foto de cualquier arreglo para verla en grande y añadirla a tu pedido.
             </p>
         </div>
 
@@ -86,12 +86,12 @@
         </div>
     </main>
 
-    <!-- MODAL ESTILO TARJETA (REFERENCIA EXACTA A TU IMAGEN) -->
+    <!-- MODAL ESTILO TARJETA (FUNCIONAL EN CELULAR Y PC) -->
     <div id="modal-detalle-arreglo" class="fixed inset-0 z-[1000] bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
         <div class="relative max-w-lg w-full bg-white rounded-3xl p-6 shadow-2xl flex flex-col items-center">
             
             <!-- Botón Cerrar "X" -->
-            <button onclick="cerrarModalDetalle()" class="absolute top-4 right-4 text-stone-500 hover:text-stone-900 text-xl font-bold bg-stone-100 rounded-full w-10 h-10 flex items-center justify-center shadow transition">
+            <button onclick="cerrarModalDetalle()" class="absolute top-4 right-4 text-stone-500 hover:text-stone-900 text-xl font-bold bg-stone-100 rounded-full w-10 h-10 flex items-center justify-center shadow transition cursor-pointer">
                 &times;
             </button>
 
@@ -135,7 +135,7 @@
                                 <input type="radio" name="globo" value="Globo Burbuja Feliz Cumpleaños 01 (+$3.00)" class="text-frutti-verde">
                                 <div class="relative group">
                                     <img src="EXTRAS/Globos/GloboBurbujaFelizCumpleaños01.jpg" alt="Globo 1" class="w-12 h-12 rounded-xl object-cover border border-stone-200 flex-shrink-0" onerror="this.src='Logo.jpeg'">
-                                    <button type="button" onclick="event.preventDefault(); abrirZoomGlobo('EXTRAS/Globos/GloboBurbujaFelizCumpleaños01.jpg', 'Globo Burbuja 01')" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white rounded-xl transition text-xs"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+                                    <button type="button" onclick="event.preventDefault(); abrirZoomGlobo('EXTRAS/Globos/GloboBurbujaFelizCumpleaños01.jpg', 'Globo Burbuja 01')" class="absolute inset-0 bg-black/40 flex items-center justify-center text-white rounded-xl transition text-xs"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
                                 </div>
                                 <div>
                                     <span class="font-bold text-stone-900 block">Burbuja 01</span>
@@ -149,7 +149,7 @@
                                 <input type="radio" name="globo" value="Globo Burbuja Feliz Cumpleaños 02 (+$3.00)" class="text-frutti-verde">
                                 <div class="relative group">
                                     <img src="EXTRAS/Globos/GloboBurbujaFelizCumpleaños02.jpg" alt="Globo 2" class="w-12 h-12 rounded-xl object-cover border border-stone-200 flex-shrink-0" onerror="this.src='Logo.jpeg'">
-                                    <button type="button" onclick="event.preventDefault(); abrirZoomGlobo('EXTRAS/Globos/GloboBurbujaFelizCumpleaños02.jpg', 'Globo Burbuja 02')" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white rounded-xl transition text-xs"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+                                    <button type="button" onclick="event.preventDefault(); abrirZoomGlobo('EXTRAS/Globos/GloboBurbujaFelizCumpleaños02.jpg', 'Globo Burbuja 02')" class="absolute inset-0 bg-black/40 flex items-center justify-center text-white rounded-xl transition text-xs"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
                                 </div>
                                 <div>
                                     <span class="font-bold text-stone-900 block">Burbuja 02</span>
@@ -163,7 +163,7 @@
                                 <input type="radio" name="globo" value="Globo Corazón Grande (+$1.50)" class="text-frutti-verde">
                                 <div class="relative group">
                                     <img src="EXTRAS/Globos/GlobosCorazonGrande.jpg" alt="Globo Corazón" class="w-12 h-12 rounded-xl object-cover border border-stone-200 flex-shrink-0" onerror="this.src='Logo.jpeg'">
-                                    <button type="button" onclick="event.preventDefault(); abrirZoomGlobo('EXTRAS/Globos/GlobosCorazonGrande.jpg', 'Globo Corazón Grande')" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white rounded-xl transition text-xs"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+                                    <button type="button" onclick="event.preventDefault(); abrirZoomGlobo('EXTRAS/Globos/GlobosCorazonGrande.jpg', 'Globo Corazón Grande')" class="absolute inset-0 bg-black/40 flex items-center justify-center text-white rounded-xl transition text-xs"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
                                 </div>
                                 <div>
                                     <span class="font-bold text-stone-900 block">Corazón Grande</span>
@@ -177,7 +177,7 @@
                                 <input type="radio" name="globo" value="Globo Pequeño (+$1.00)" class="text-frutti-verde">
                                 <div class="relative group">
                                     <img src="EXTRAS/Globos/GlobosFelizCumpleañosPequeño.jpg" alt="Globo Pequeño" class="w-12 h-12 rounded-xl object-cover border border-stone-200 flex-shrink-0" onerror="this.src='Logo.jpeg'">
-                                    <button type="button" onclick="event.preventDefault(); abrirZoomGlobo('EXTRAS/Globos/GlobosFelizCumpleañosPequeño.jpg', 'Globo Pequeño')" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white rounded-xl transition text-xs"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+                                    <button type="button" onclick="event.preventDefault(); abrirZoomGlobo('EXTRAS/Globos/GlobosFelizCumpleañosPequeño.jpg', 'Globo Pequeño')" class="absolute inset-0 bg-black/40 flex items-center justify-center text-white rounded-xl transition text-xs"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
                                 </div>
                                 <div>
                                     <span class="font-bold text-stone-900 block">Globo Pequeño (Variedad de Modelos)</span>
@@ -333,7 +333,7 @@
         <p class="text-white font-bold">Frutti-Choe Quito &copy; 2026 - Regalos para Hombre</p>
     </footer>
 
-    <!-- SCRIPT CON VENTANA MODAL ESTILO TARJETA -->
+    <!-- SCRIPT CORREGIDO PARA TÁCTIL Y PC -->
     <script>
         const modelosHombres = [
             { nombre: "Caja Feliz", precio: 24.00, imagen: "Modelos Hombres/Caja-Feliz.jpg" },
@@ -355,16 +355,17 @@
 
             modelosHombres.forEach(arreglo => {
                 contenedor.innerHTML += `
-                    <div class="bg-white rounded-3xl shadow-lg border-2 border-stone-200 overflow-hidden flex flex-col justify-between hover:shadow-2xl transition-all duration-300 group">
+                    <div class="bg-white rounded-3xl shadow-lg border-2 border-stone-200 overflow-hidden flex flex-col justify-between hover:shadow-2xl transition-all duration-300">
                         
-                        <!-- Imagen con clic para abrir modal estilo tarjeta -->
+                        <!-- Imagen táctil: Al tocarla en celular o PC abre directamente el modal detallado -->
                         <div onclick="abrirModalDetalle('${arreglo.nombre}', ${arreglo.precio}, '${arreglo.imagen}')" class="relative h-56 bg-stone-100 overflow-hidden flex items-center justify-center cursor-pointer">
                             <img src="${arreglo.imagen}" 
                                  alt="${arreglo.nombre}" 
-                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                                 class="w-full h-full object-cover hover:scale-105 transition duration-500"
                                  onerror="this.src='Logo.jpeg'">
-                            <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold text-xs">
-                                <i class="fa-solid fa-magnifying-glass-plus text-xl mr-2"></i> Ver Detalle
+                            <div class="absolute bottom-2 right-2 bg-black/60 text-white px-2.5 py-1 rounded-full text-[10px] font-bold flex items-center space-x-1 shadow">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                                <span>Tocar para ver</span>
                             </div>
                         </div>
 
@@ -399,7 +400,7 @@
             actualizarTotal();
         }
 
-        // FUNCIONES DEL MODAL DE DETALLE (ESTILO TU IMAGEN)
+        // FUNCIONES DEL MODAL DE DETALLE
         function abrirModalDetalle(nombre, precio, imagen) {
             document.getElementById('modal-img-src').src = imagen;
             document.getElementById('modal-titulo').innerText = nombre;
@@ -596,7 +597,7 @@
             }
 
             const totalGeneral = subtotalArreglos + subtotalExtras;
-            mensaje += `%0A*TOTAL GENERAL A PAGAR: $${totalGeneral.toFixed(2)}*%0A%0A*(Nota: El valor del domicilio se acordará con el asesor según la ubicación en Quito)*%0A%0A¿Me confirman la disponibilidad por favor?`;
+            mensaje += `%0A*TOTAL GENERAL A PAGar: $${totalGeneral.toFixed(2)}*%0A%0A*(Nota: El valor del domicilio se acordará con el asesor según la ubicación en Quito)*%0A%0A¿Me confirman la disponibilidad por favor?`;
 
             const numeroWhatsApp = "593959040348";
             window.open(`https://wa.me/${numeroWhatsApp}?text=${mensaje}`, '_blank');
